@@ -15,6 +15,6 @@ server.use(Restify.plugins.jsonBodyParser());
 require('./routes/license')(server);
 require('./routes/user')(server);
 
-server.listen(config.ENV_CONFIG.server.port,config.ENV_CONFIG.server.ip,function(err){
+server.listen(process.env.PORT || config.ENV_CONFIG.server.port,config.ENV_CONFIG.server.ip,function(err){
   console.log("Server Url : "+server.url);
 });
