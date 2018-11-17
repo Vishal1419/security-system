@@ -17,8 +17,8 @@ const securityProduction = {
         "port":11504,
     },
     server:{
-        ip:"https://security-system.herokuapp.com/",
-        port:80
+        ip:"localhost",
+        port:8888
     },
     maximumGeneratedKeys: 10
 };
