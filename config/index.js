@@ -17,7 +17,7 @@ const securityProduction = {
         "port":11504,
     },
     server:{
-        ip:"localhost",
+        ip:"0.0.0.0",
         port:8888
     },
     maximumGeneratedKeys: 10
