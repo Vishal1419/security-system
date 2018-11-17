@@ -10,18 +10,17 @@ const securityDevelopment = {
     },
     maximumGeneratedKeys: 10
 };
-
 const securityProduction = {
     db: {
-        "database": "security",
-        "host": "127.0.0.1",
-        "port":27017,
+        "database": "security_prod",
+        "host": "Vishal1419:1419251v@ds211504.mlab.com",
+        "port":11504,
     },
     server:{
-        ip:"139.59.18.253",
+        ip:"https://security-system.herokuapp.com/",
         port:80
     },
     maximumGeneratedKeys: 10
 };
 
-module.exports.ENV_CONFIG = securityDevelopment;
+module.exports.ENV_CONFIG = securityProduction;
