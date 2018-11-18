@@ -13,6 +13,8 @@ server.use(Restify.plugins.queryParser());
 server.use(Restify.plugins.jsonBodyParser());
 server.use(cors());
 
+app.options('*', cors());
+
 require('./routes/license')(server);
 require('./routes/user')(server);
 
