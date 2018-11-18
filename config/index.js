@@ -23,4 +23,4 @@ const securityProduction = {
     maximumGeneratedKeys: 10
 };
 
-module.exports.ENV_CONFIG = securityProduction;
+module.exports.ENV_CONFIG = securityDevelopment;
