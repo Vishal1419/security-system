@@ -32,5 +32,6 @@ SecurityResponse.SUCCESS_CODE = 1000;
 SecurityResponse.UNKNOWN_ERROR= 1001;
 SecurityResponse.DATABASE_ERROR = 1002;
 SecurityResponse.LICENSE_KEY_ERROR = 1003;
+SecurityResponse.REQUIRED_FIELD = 1004;
 
 module.exports = SecurityResponse;
