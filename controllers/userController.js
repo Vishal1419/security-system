@@ -31,12 +31,13 @@ module.exports = {
               "hdd": licenses[0].hdd,
               "is_used": true,
               "updated_times": licenses[0].updated_times + 1,
+              "user": licenses[0].user,
             }, (err, updatedLicense) => {
               if(err) {
                 return security_response.setStatusCode(SecurityResponse.DATABASE_ERROR)
                   .setResponseBody({"error": err})
                   .send();
-              }                
+              }
 
               userModel.getByKey(request.body.key, (err, user) => {
                 if(err) {
@@ -79,22 +80,25 @@ module.exports = {
                 .send();
             }                
 
-            const lic = {
-              "_id": licenses[0]._id,
-              "key": licenses[0].key,
-              "hdd": request.body.hdd,
-              "is_used": true,
-              "updated_times": 0
-            }
-
-            licenseModel.updateLic(lic, (err, updatedLicense) => {
-              if(err) {
-                return security_response.setStatusCode(SecurityResponse.DATABASE_ERROR)
-                  .setResponseBody({"error": err})
-                  .send();
-              }     
               if(users && users.length > 0) {
                 //user exists. Means existing user purchased a new license           
+
+                const lic = {
+                  "_id": licenses[0]._id,
+                  "key": licenses[0].key,
+                  "hdd": request.body.hdd,
+                  "is_used": true,
+                  "updated_times": 0,
+                  "user": users[0]._id,
+                }
+    
+                licenseModel.updateLic(lic, (err, updatedLicense) => {
+                  if(err) {
+                    return security_response.setStatusCode(SecurityResponse.DATABASE_ERROR)
+                      .setResponseBody({"error": err})
+                      .send();
+                  }     
+    
                   const new_licenses = users[0].licenses;
                   new_licenses.push(mongoose.Types.ObjectId(lic._id));
 
@@ -113,7 +117,8 @@ module.exports = {
                     return security_response.setStatusCode(SecurityResponse.SUCCESS_CODE)
                       .setResponseBody({"result": "New License assigned to Existing User."})
                       .send();
-                  });        
+                  });
+                });
               } else {
                 //user does not exist.
                 //Create a new user
@@ -122,8 +127,8 @@ module.exports = {
                   mobile_no: request.body.mobile_no,
                   licenses: []
                 }
-
-                user.licenses.push(mongoose.Types.ObjectId(lic._id));
+    
+                user.licenses.push(mongoose.Types.ObjectId(licenses[0]._id));
                 userModel.createUser(user, function(err, result) {
                   if(err) {
                     return security_response.setStatusCode(SecurityResponse.DATABASE_ERROR)
@@ -131,12 +136,28 @@ module.exports = {
                       .send();
                   }                
 
+                  const lic = {
+                    "_id": licenses[0]._id,
+                    "key": licenses[0].key,
+                    "hdd": request.body.hdd,
+                    "is_used": true,
+                    "updated_times": 0,
+                    "user": result._id,
+                  }
+      
+                  licenseModel.updateLic(lic, (err, updatedLicense) => {
+                    if(err) {
+                      return security_response.setStatusCode(SecurityResponse.DATABASE_ERROR)
+                        .setResponseBody({"error": err})
+                        .send();
+                    }     
+  
                   return security_response.setStatusCode(SecurityResponse.SUCCESS_CODE)
                     .setResponseBody({"result": "New user created"})
                     .send();
                 });                                
-              }
-            });
+              });
+            }
           });
         }
       } else {
