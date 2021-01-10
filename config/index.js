@@ -1,8 +1,6 @@
 const securityDevelopment = {
     db: {
-        "database": "security_dev",
-        "host": "Vishal1419:1419251v@ds029901.mlab.com",
-        "port": 29901,
+        connectionString: "mongodb+srv://Vishal1419:1419251v@security-dev.6rmco.mongodb.net/security_dev?retryWrites=true&w=majority",
     },
     server:{
         ip:"127.0.0.1",
@@ -12,9 +10,7 @@ const securityDevelopment = {
 };
 const securityProduction = {
     db: {
-        "database": "security_prod",
-        "host": "Vishal1419:1419251v@ds211504.mlab.com",
-        "port":11504,
+        connectionString: "mongodb+srv://Vishal1419:1419251v@security-prod.vh9br.mongodb.net/security_prod?retryWrites=true&w=majority",
     },
     server:{
         ip:"0.0.0.0",
