@@ -13,7 +13,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "isvalid": "^1.6.6",
-    "mongoose": "^5.3.12",
+    "mongoose": "^5.7.5",
     "random-key": "^0.3.2"
   },
   "engines": {
